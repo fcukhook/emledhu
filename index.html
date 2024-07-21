@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0e4d7;
+            font-family: 'Times New Roman', Times, serif;
+            color: #3c3c3c;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .letter-wrapper {
+            position: relative;
+            width: 600px;
+            height: 300px; /* Adjust height based on content */
+            overflow: hidden;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .letter {
+            position: relative;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .cover-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4); /* Pink gradient */
+            border-radius: 10px;
+            z-index: 1;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .letter-wrapper.animate .cover-box {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-wrapper" onmouseenter="startAnimation()">
+        <div class="cover-box"></div>
+        <div class="letter" id="loveLetter">
+            <h1>heyy Deep..,</h1>
+            <p>
+            Dont worry , feel kale , ni nundi emina extract cheddam ankuntunna but nathoni aithaledhu, snap iyyachu ga....🥺, ok but dhini venaka okati undi le 😉.
+            </p>
+            <p>
+                With all my love,
+                <br>
+                Special person
+            </p>
+        </div>
+    </div>
+
+    <!-- Audio element without autoplay -->
+    <audio id="loveSong" src="kushi.mp3" preload="auto"></audio>
+
+    <script>
+        // JavaScript to handle animation and audio playback
+        var audio = document.getElementById('loveSong');
+        var audioPlaying = false;
+
+        function startAnimation() {
+            var wrapper = document.querySelector('.letter-wrapper');
+            var coverBox = document.querySelector('.cover-box');
+
+            wrapper.classList.add('animate');
+
+            // Add event listener for when the animation ends
+            coverBox.addEventListener('transitionend', function() {
+                if (!audioPlaying) {
+                    audio.currentTime = 11; // Start playing from the 11th second
+                    audio.play().then(function() {
+                        console.log('Audio playback started successfully.');
+                        audioPlaying = true;
+                    }).catch(function(error) {
+                        console.error('Playback failed:', error);
+                    });
+                }
+            }, { once: true }); // The event listener will be removed after it triggers once
+        }
+    </script>
+</body>
+</html>
